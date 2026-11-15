@@ -2,8 +2,21 @@
 import { Button } from '@/components/ui/button'
 import { ArrowDown } from '@lucide/vue'
 import { ref, onMounted, onUnmounted } from 'vue'
+import { useCharacterMovement } from '@/composables/useCharacterMovement'
+import { useRouter } from 'vue-router'
 
 const showButtons = ref(false)
+
+const { characterX, characterY, moveTo } = useCharacterMovement()
+
+const router = useRouter()
+
+function handleButtonClick(path: string) {
+  
+  setTimeout(() => {
+    router.push(path)
+  }, 1500)
+}
 
 function handleScroll() {
   showButtons.value = window.scrollY > 50
@@ -21,6 +34,7 @@ onUnmounted(() => {
 
 <template>
   <div
+    @click="moveTo"
     class="relative min-h-[200vh] bg-cover bg-center bg-no-repeat"
     style="background-image: url('/images/fondo.jpg')"
   >
@@ -45,19 +59,45 @@ onUnmounted(() => {
           ? 'translate-y-0 opacity-100'
           : 'translate-y-20 opacity-0 pointer-events-none'"
       >
-        <Button class="bg-black/10 text-gray-800 hover:text-white hover:bg-gray-400 rounded-none">
-          <RouterLink to="/texts">Textos</RouterLink>
+        <Button
+          @click="handleButtonClick('/texts')"
+          class="bg-black/10 text-gray-800 hover:text-white hover:bg-black/30 rounded-none"
+        >
+          Textos
         </Button>
 
-        <Button class="bg-black/10 text-gray-800 hover:text-white hover:bg-gray-400 rounded-none">
-          <RouterLink to="/drawings">Dibujos</RouterLink>
+        <Button
+          @click="handleButtonClick('/drawings')"
+          class="bg-black/10 text-gray-800 hover:text-white hover:bg-black/30 rounded-none"
+        >
+          Dibujos
         </Button>
 
-        <Button class="bg-black/10 text-gray-800 hover:text-white hover:bg-gray-400 rounded-none">
-          <RouterLink to="/contact">Contacto</RouterLink>
+        <Button
+          @click="handleButtonClick('/contact')"
+          class="bg-black/10 text-gray-800 hover:text-white hover:bg-black/30 rounded-none"
+        >
+          Contacto
         </Button>
       </div>
     </section>
+
+  <div
+    v-if="showButtons"
+    class="fixed z-20 text-4xl pointer-events-none transition-all duration-700 ease-in-out"
+    :style="{
+      left: `${characterX}px`,
+      top: `${characterY}px`,
+      transform: 'translate(-50%, -50%)'
+    }"
+  >
+    <img
+    src="/images/click.png"
+    alt="Personaje"
+    class="w-5 h-auto object-contain"
+  />
+  </div>
+
   </div>
 </template>
 
