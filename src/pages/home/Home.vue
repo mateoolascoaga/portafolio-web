@@ -19,7 +19,7 @@ function handleButtonClick(path: string) {
 }
 
 function handleScroll() {
-  showButtons.value = window.scrollY > 50
+  showButtons.value = window.scrollY >= window.innerHeight
 }
 
 onMounted(() => {
@@ -38,7 +38,7 @@ onUnmounted(() => {
     class="relative min-h-[200vh] bg-cover bg-center bg-no-repeat"
     style="background-image: url('/images/fondo.jpg')"
   >
-    <div class="absolute inset-0 bg-white/70"></div>
+    <div class="absolute inset-0 bg-white/50"></div>
 
     <section
       class="relative z-10 h-screen flex flex-col items-center justify-center"
@@ -54,7 +54,7 @@ onUnmounted(() => {
 
     <section class="relative z-10 h-screen flex items-center justify-center">
       <div
-        class="flex gap-4 transition-all duration-700 ease-out"
+        class="flex gap-6 transition-all duration-1000 ease-in-out"
         :class="showButtons
           ? 'translate-y-0 opacity-100'
           : 'translate-y-20 opacity-0 pointer-events-none'"
@@ -97,7 +97,7 @@ onUnmounted(() => {
     class="w-5 h-auto object-contain"
   />
   </div>
-
+  
   </div>
 </template>
 
