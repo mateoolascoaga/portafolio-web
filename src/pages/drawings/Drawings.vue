@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import PhotoCarousel from '@/components/ui/PhotosCarousel.vue'
+import PhotoCarousel from '@/components/PhotosCarousel.vue'
 import { useCharacterMovement } from '@/composables/useCharacterMovement'
 
 const drawingPhotos = [
