@@ -74,11 +74,19 @@ onUnmounted(() => {
         </Button>
 
         <Button
+          @click="handleButtonClick('/gallery')"
+          class="bg-black/10 text-gray-800 hover:text-white hover:bg-black/30 rounded-none"
+        >
+          Galería
+        </Button>
+
+        <Button
           @click="handleButtonClick('/contact')"
           class="bg-black/10 text-gray-800 hover:text-white hover:bg-black/30 rounded-none"
         >
           Contacto
         </Button>
+
       </div>
     </section>
 
