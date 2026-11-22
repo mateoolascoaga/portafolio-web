@@ -36,17 +36,17 @@ onUnmounted(() => window.removeEventListener('keydown', handleKeydown))
 <template>
   <main
     @click="moveTo"
-    class="relative min-h-screen bg-neutral-50"
+    class="relative min-h-screen bg-neutral-50 overflow-x-hidden"
   >
 
-    <div class="relative z-10 min-h-screen flex flex-col justify-center items-center px-6 md:px-12 py-16">
+    <div class="relative z-10 min-h-screen flex flex-col justify-center items-center px-4 sm:px-6 md:px-12 py-20 sm:py-16">
       
       <div class="w-full max-w-7xl flex flex-col items-center">
-        <h1 class="font-tangerine text-8xl mb-14 text-gray-800 text-center">
+        <h1 class="font-tangerine text-6xl sm:text-7xl md:text-8xl mb-8 sm:mb-12 md:mb-14 text-gray-800 text-center">
           Galería
         </h1>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 w-full">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-8 md:gap-10 w-full">
           <div
             v-for="(photo, index) in galleryPhotos"
             :key="index"
@@ -91,12 +91,12 @@ onUnmounted(() => window.removeEventListener('keydown', handleKeydown))
         <div
           v-if="selectedPhoto"
           @click.stop="closePhoto"
-          class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-xs p-4 md:p-10 cursor-zoom-out"
+          class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-xs p-3 sm:p-4 md:p-10 cursor-zoom-out"
         >
           <button
             @click.stop="closePhoto"
             aria-label="Cerrar imagen"
-            class="absolute top-6 right-6 flex h-10 w-10 items-center justify-center rounded-full bg-white/15 text-white text-xl hover:bg-white/30 transition-colors cursor-pointer"
+            class="absolute top-4 right-4 sm:top-6 sm:right-6 flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-white/15 text-white text-lg sm:text-xl hover:bg-white/30 transition-colors cursor-pointer"
           >
             ✕
           </button>
@@ -105,7 +105,7 @@ onUnmounted(() => window.removeEventListener('keydown', handleKeydown))
             :src="selectedPhoto"
             alt="Vista ampliada"
             @click.stop
-            class="max-h-[88vh] max-w-[92vw] object-contain rounded-sm shadow-2xl cursor-default"
+            class="max-h-[85vh] sm:max-h-[88vh] max-w-[94vw] sm:max-w-[92vw] object-contain rounded-sm shadow-2xl cursor-default"
           />
         </div>
       </Transition>

@@ -12,30 +12,30 @@ const { characterX, characterY, moveTo } = useCharacterMovement()
 <template>
   <main
     @click="moveTo"
-    class="relative min-h-screen bg-cover bg-center bg-no-repeat"
+    class="relative min-h-screen bg-cover bg-center bg-no-repeat overflow-x-hidden"
     style="background-image: url('/images/fondotextos.jpg')"
   >
   
     <div class="absolute inset-0 bg-white/50"></div>
 
-   <div class="relative z-10 min-h-screen flex flex-col justify-center items-center">
+   <div class="relative z-10 min-h-screen flex flex-col justify-center items-center px-4 sm:px-6 py-20 sm:py-16">
 
-    <div class="bg-white/50 shadow-sm p-12">
+    <div class="bg-white/50 shadow-sm p-6 sm:p-10 md:p-12 w-full max-w-md sm:max-w-lg">
 
-    <h1 class="font-tangerine text-8xl mb-12 text-gray-800 text-center">
+    <h1 class="font-tangerine text-6xl sm:text-7xl md:text-8xl mb-8 sm:mb-10 md:mb-12 text-gray-800 text-center">
       Textos
     </h1>
 
-    <div class="flex flex-col items-center gap-6">
+    <div class="flex flex-col items-center gap-4 sm:gap-6 w-full">
 
-      <div class="flex flex-col items-center gap-6">
+      <div class="flex flex-col items-center gap-4 sm:gap-6 w-full">
         <a
           v-for="texto in textos"
           :key="texto.id"
           :href="`#/texts/${texto.id}`"
           target="_blank"
           rel="noopener noreferrer"
-          class="text-xl text-gray-700 bg-black/20 p-2 hover:text-white hover:bg-black/40 transition-all duration-300"
+          class="w-full sm:w-auto text-center text-lg sm:text-xl text-gray-700 bg-black/20 px-4 py-2.5 sm:p-2 hover:text-white hover:bg-black/40 transition-all duration-300"
         >
           {{ texto.titulo }}
         </a>

@@ -1,4 +1,3 @@
-
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 
@@ -107,7 +106,7 @@ const texto = textos[String(route.params.id)]
 
 <template>
   <main
-    class="relative min-h-screen bg-cover bg-center bg-no-repeat px-12 py-16"
+    class="relative min-h-screen bg-cover bg-center bg-no-repeat px-4 sm:px-8 md:px-12 py-20 sm:py-16 overflow-x-hidden"
     :style="{ backgroundImage: `url('${texto?.fondo}')` }"
   >
 
@@ -117,13 +116,13 @@ const texto = textos[String(route.params.id)]
 
       <article
         v-if="texto"
-        class="max-w-2xl mx-auto text-center bg-white/70 shadow-lg p-10"
+        class="w-full max-w-2xl mx-auto text-center bg-white/70 shadow-lg p-6 sm:p-8 md:p-10"
       >
-        <h1 class="font-tangerine text-7xl mb-12 text-gray-800">
+        <h1 class="font-tangerine text-5xl sm:text-6xl md:text-7xl mb-8 sm:mb-10 md:mb-12 text-gray-800 leading-tight">
           {{ texto.titulo }}
         </h1>
 
-        <p class="text-lg leading-9 text-gray-700 whitespace-pre-line">
+        <p class="text-base sm:text-lg leading-7 sm:leading-8 md:leading-9 text-gray-700 whitespace-pre-line">
           {{ texto.contenido }}
         </p>
       </article>

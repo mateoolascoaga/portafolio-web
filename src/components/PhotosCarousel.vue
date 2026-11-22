@@ -79,11 +79,11 @@ onUnmounted(() => window.removeEventListener('keydown', handleKeydown))
 
     <CarouselPrevious
       @click.stop
-      class="hidden md:flex justify-center items-center bg-white/80 text-gray-800 border-gray-300 shadow-sm hover:bg-black/40 hover:text-white transition-colors"
+      class="flex -left-3 md:-left-12 h-7 w-7 md:h-8 md:w-8 justify-center items-center bg-white/90 text-gray-800 border-gray-300 shadow-sm hover:bg-gray-800 hover:text-white transition-colors"
     />
     <CarouselNext
       @click.stop
-      class="hidden md:flex justify-center items-center bg-white/80 text-gray-800 border-gray-300 shadow-sm hover:bg-black/40 hover:text-white transition-colors"
+      class="flex -right-3 md:-right-12 h-7 w-7 md:h-8 md:w-8 justify-center items-center bg-white/90 text-gray-800 border-gray-300 shadow-sm hover:bg-gray-800 hover:text-white transition-colors"
     />
   </Carousel>
 
