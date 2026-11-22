@@ -33,18 +33,21 @@ const goTo = (path: string) => {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         
-        <DropdownMenuItem @click="goTo('/')" class="cursor-pointer">
-          Inicio
-        </DropdownMenuItem>
-        <DropdownMenuItem @click="goTo('/drawings')" class="cursor-pointer">
-          Drawings
-        </DropdownMenuItem>
-        <DropdownMenuItem @click="goTo('/gallery')" class="cursor-pointer">
-          Galería
-        </DropdownMenuItem>
-        <DropdownMenuItem @click="goTo('/texts')" class="cursor-pointer">
-          Textos
-        </DropdownMenuItem>
+        <DropdownMenuItem as-child>
+  <RouterLink to="/" class="w-full cursor-pointer">Inicio</RouterLink>
+      </DropdownMenuItem>
+      <DropdownMenuItem as-child>
+        <RouterLink to="/drawings" class="w-full cursor-pointer">Dibujos</RouterLink>
+      </DropdownMenuItem>
+      <DropdownMenuItem as-child>
+        <RouterLink to="/gallery" class="w-full cursor-pointer">Galería</RouterLink>
+      </DropdownMenuItem>
+      <DropdownMenuItem as-child>
+        <RouterLink to="/texts" class="w-full cursor-pointer">Textos</RouterLink>
+      </DropdownMenuItem>
+      <DropdownMenuItem as-child>
+        <RouterLink to="/contact" class="w-full cursor-pointer">Contacto</RouterLink>
+      </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   </div>

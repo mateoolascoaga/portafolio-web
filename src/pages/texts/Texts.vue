@@ -29,17 +29,17 @@ const { characterX, characterY, moveTo } = useCharacterMovement()
     <div class="flex flex-col items-center gap-4 sm:gap-6 w-full">
 
       <div class="flex flex-col items-center gap-4 sm:gap-6 w-full">
-        <a
+        <RouterLink
           v-for="texto in textos"
           :key="texto.id"
-          :href="`#/texts/${texto.id}`"
+          :to="{ name: 'text-detail', params: { id: texto.id } }"
           target="_blank"
           rel="noopener noreferrer"
           class="w-full sm:w-auto text-center text-lg sm:text-xl text-gray-700 bg-black/20 px-4 py-2.5 sm:p-2 hover:text-white hover:bg-black/40 transition-all duration-300"
         >
           {{ texto.titulo }}
-        </a>
-      </div>
+        </RouterLink>
+       </div>
 
     </div>
 
