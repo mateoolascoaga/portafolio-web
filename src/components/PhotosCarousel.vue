@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { computed } from 'vue'
 import { Card, CardContent } from '@/components/ui/card'
 import {
   Carousel,
@@ -8,6 +8,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel'
+import { ChevronLeft, ChevronRight, X } from '@lucide/vue'
+import { useLightbox } from '@/composables/useLightbox'
 
 interface Props {
   photos: string[]
@@ -23,24 +25,18 @@ const props = withDefaults(defineProps<Props>(), {
   dragFree: true,
 })
 
-const selectedPhoto = ref<string | null>(null)
+const {
+  selectedIndex,
+  selectedItem: selectedPhoto,
+  open: openPhoto,
+  close: closePhoto,
+  next: nextPhoto,
+  prev: prevPhoto,
+} = useLightbox(props.photos)
 
-const openPhoto = (photo: string) => {
-  selectedPhoto.value = `${props.basePath}/${photo}.jpg`
-}
-
-const closePhoto = () => {
-  selectedPhoto.value = null
-}
-
-const handleKeydown = (e: KeyboardEvent) => {
-  if (e.key === 'Escape' && selectedPhoto.value) {
-    closePhoto()
-  }
-}
-
-onMounted(() => window.addEventListener('keydown', handleKeydown))
-onUnmounted(() => window.removeEventListener('keydown', handleKeydown))
+const selectedPhotoUrl = computed(() =>
+  selectedPhoto.value ? `${props.basePath}/${selectedPhoto.value}.jpg` : null
+)
 </script>
 
 <template>
@@ -51,7 +47,6 @@ onUnmounted(() => window.removeEventListener('keydown', handleKeydown))
       loop: props.loop,
       dragFree: props.dragFree,
     }"
-  
   >
     <CarouselContent class="-ml-2 md:-ml-4">
       <CarouselItem
@@ -60,15 +55,14 @@ onUnmounted(() => window.removeEventListener('keydown', handleKeydown))
         class="pl-2 md:pl-4 md:basis-1/2"
       >
         <div class="p-1 h-full">
-
           <Card
-            @click.stop="openPhoto(photo)"
+            @click.stop="openPhoto(i)"
             class="h-full overflow-hidden rounded-sm border border-gray-300/80 bg-white/70 shadow-sm group cursor-zoom-in"
           >
             <CardContent class="flex aspect-[6/4] items-center justify-center p-0">
               <img
                 :src="`${props.basePath}/${photo}.jpg`"
-                :alt="`Drawing ${photo}`"
+                :alt="`Obra ${photo}`"
                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
             </CardContent>
@@ -97,25 +91,47 @@ onUnmounted(() => window.removeEventListener('keydown', handleKeydown))
       leave-to-class="opacity-0"
     >
       <div
-        v-if="selectedPhoto"
+        v-if="selectedPhotoUrl"
         @click.stop="closePhoto"
         class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-xs p-4 md:p-10 cursor-zoom-out"
       >
-
         <button
+          type="button"
           @click.stop="closePhoto"
           aria-label="Cerrar imagen"
-          class="absolute top-6 right-6 flex h-10 w-10 items-center justify-center rounded-full bg-white/15 text-white text-xl hover:bg-white/30 transition-colors cursor-pointer"
+          class="absolute top-6 right-6 flex h-10 w-10 items-center justify-center rounded-full bg-white/15 text-white hover:bg-white/30 transition-colors cursor-pointer"
         >
-          ✕
+          <X :size="20" />
         </button>
 
-        <img
-          :src="selectedPhoto"
-          alt="Vista ampliada"
-          @click.stop
-          class="max-h-[88vh] max-w-[92vw] object-contain rounded-sm shadow-2xl cursor-default"
-        />
+        <button
+          type="button"
+          @click.stop="prevPhoto"
+          aria-label="Imagen anterior"
+          class="absolute left-3 sm:left-6 flex h-10 w-10 items-center justify-center rounded-full bg-white/15 text-white hover:bg-white/30 transition-colors cursor-pointer"
+        >
+          <ChevronLeft :size="22" />
+        </button>
+
+        <div @click.stop class="flex flex-col items-center cursor-default">
+          <img
+            :src="selectedPhotoUrl"
+            :alt="`Vista ampliada ${selectedPhoto}`"
+            class="max-h-[82vh] max-w-[85vw] object-contain rounded-sm shadow-2xl"
+          />
+          <span class="mt-3 text-xs tracking-widest uppercase text-white/75">
+            {{ (selectedIndex ?? 0) + 1 }} / {{ props.photos.length }}
+          </span>
+        </div>
+
+        <button
+          type="button"
+          @click.stop="nextPhoto"
+          aria-label="Imagen siguiente"
+          class="absolute right-3 sm:right-6 flex h-10 w-10 items-center justify-center rounded-full bg-white/15 text-white hover:bg-white/30 transition-colors cursor-pointer"
+        >
+          <ChevronRight :size="22" />
+        </button>
       </div>
     </Transition>
   </Teleport>
