@@ -7,12 +7,11 @@ import { useRouter } from 'vue-router'
 
 const showButtons = ref(false)
 
-const { characterX, characterY, moveTo } = useCharacterMovement()
+const { characterX, characterY, hasInteracted, moveTo } = useCharacterMovement()
 
 const router = useRouter()
 
 function handleButtonClick(path: string) {
-  
   setTimeout(() => {
     router.push(path)
   }, 1500)
@@ -29,7 +28,6 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
 })
-
 </script>
 
 <template>
@@ -52,7 +50,7 @@ onUnmounted(() => {
       </div>
     </section>
 
-    <section class="relative z-10 h-screen flex items-center justify-center px-4">
+    <section class="relative z-10 h-screen flex flex-col items-center justify-center px-4">
       <div
         class="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4 sm:gap-6 w-full max-w-xs sm:max-w-none transition-all duration-1000 ease-in-out"
         :class="showButtons
@@ -86,25 +84,46 @@ onUnmounted(() => {
         >
           Contacto
         </Button>
+      </div>
 
+      <div class="h-10 mt-6 flex items-center justify-center">
+        <Transition
+          enter-active-class="transition-opacity duration-700 ease-out"
+          enter-from-class="opacity-0"
+          enter-to-class="opacity-100"
+          leave-active-class="transition-opacity duration-400 ease-in"
+          leave-from-class="opacity-100"
+          leave-to-class="opacity-0"
+        >
+          <button
+            v-if="showButtons && !hasInteracted"
+            type="button"
+            @click.stop="moveTo"
+            class="flex items-center gap-2 text-xs tracking-widest uppercase text-gray-600/80 hover:text-gray-900 transition-colors cursor-pointer"
+          >
+            <span class="flex items-center gap-2 animate-pulse">
+              <img src="/images/click.png" alt="" class="w-3.5 h-auto opacity-80" />
+              <span>haz clic en el espacio</span>
+            </span>
+          </button>
+        </Transition>
       </div>
     </section>
 
-  <div
-    v-if="showButtons"
-    class="fixed z-20 text-4xl pointer-events-none transition-all duration-700 ease-in-out"
-    :style="{
-      left: `${characterX}px`,
-      top: `${characterY}px`,
-      transform: 'translate(-50%, -50%)'
-    }"
-  >
-    <img
-    src="/images/click.png"
-    alt="Personaje"
-    class="w-5 h-auto object-contain"
-  />
-  </div>
-  
+    <div
+      v-if="showButtons"
+      class="fixed z-20 text-4xl pointer-events-none transition-all duration-700 ease-in-out"
+      :style="{
+        left: `${characterX}px`,
+        top: `${characterY}px`,
+        transform: 'translate(-50%, -50%)'
+      }"
+    >
+      <img
+        src="/images/click.png"
+        alt="Personaje"
+        class="w-5 h-auto object-contain"
+      />
+    </div>
   </div>
 </template>
