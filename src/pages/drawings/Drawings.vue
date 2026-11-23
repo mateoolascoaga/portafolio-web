@@ -8,8 +8,8 @@ const drawingPhotos = [
   'drawing3',
   'drawing4',
   'drawing5',
+  'drawing6',
   'drawing7',
-  'drawing8',
 ]
 
 const { characterX, characterY, moveTo } = useCharacterMovement()

@@ -37,13 +37,13 @@ const goTo = (path: string) => {
   <RouterLink to="/" class="w-full cursor-pointer">Inicio</RouterLink>
       </DropdownMenuItem>
       <DropdownMenuItem as-child>
+        <RouterLink to="/texts" class="w-full cursor-pointer">Textos</RouterLink>
+      </DropdownMenuItem>
+      <DropdownMenuItem as-child>
         <RouterLink to="/drawings" class="w-full cursor-pointer">Dibujos</RouterLink>
       </DropdownMenuItem>
       <DropdownMenuItem as-child>
         <RouterLink to="/gallery" class="w-full cursor-pointer">Galería</RouterLink>
-      </DropdownMenuItem>
-      <DropdownMenuItem as-child>
-        <RouterLink to="/texts" class="w-full cursor-pointer">Textos</RouterLink>
       </DropdownMenuItem>
       <DropdownMenuItem as-child>
         <RouterLink to="/contact" class="w-full cursor-pointer">Contacto</RouterLink>
