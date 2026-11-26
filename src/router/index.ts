@@ -1,4 +1,3 @@
-
 import Contact from "@/pages/contact/Contact.vue";
 import Drawings from "@/pages/drawings/Drawings.vue";
 import Home from "@/pages/home/Home.vue";
@@ -36,14 +35,15 @@ export const router = createRouter({
       name: 'text-detail',
       component: TextDetail
     },
-     {
+    {
       path: '/gallery',
       name: 'gallery',
       component: Gallery
     },
     {
-      path: '/:patchMatch(.*)',
-      redirect: '/'
-    }
+      path: '/:pathMatch(.*)*',
+      name: 'not-found',
+      component: () => import('@/pages/NotFound.vue'),
+    },
   ]
 })

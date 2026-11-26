@@ -11,6 +11,8 @@ const galleryPhotos = [
   'fondotextos2',
   'fondodibujos',
   'fondocontacto',
+  'galeria1',
+  'galeria2',
 ]
 
 const basePath = '/images'
