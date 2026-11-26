@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
 import { LayoutGridCircles } from '@lucide/vue'
 import {
   DropdownMenu,
@@ -10,11 +9,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 
-const router = useRouter()
 
-const goTo = (path: string) => {
-  router.push(path)
-}
 </script>
 
 <template>
